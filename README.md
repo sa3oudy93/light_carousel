@@ -13,11 +13,75 @@ Add the module to your project `pubspec.yaml`:
 ...
 dependencies:
  ...
- light_carousel: ^0.0.1
+ light_carousel: 
 ...
 ```
 
 And install it using `flutter packages get` on your project folder. After that, just import the module and use it:
+
+//...
+
+
+```dart
+import 'package:light_carousel/light_carousel.dart';
+
+//...
+Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Center(
+            child: SizedBox(
+              height: 150.0,
+              width: 300.0,
+              child: LightCarousel(
+                boxFit: BoxFit.cover,
+                autoPlay: true,
+                animationCurve: Curves.fastOutSlowIn,
+                animationDuration: Duration(milliseconds: 1000),
+                dotSize: 6.0,
+                dotIncreasedColor: Color(0xFFFF335C),
+                dotBgColor: Colors.transparent,
+                dotPosition: DotPosition.bottomCenter,
+                dotVerticalPadding: 10.0,
+                showIndicator: true,
+                indicatorBgPadding: 7.0,
+                images: [
+                  NetworkImage(
+                      'https://cdn-images-1.medium.com/max/2000/1*GqdzzfB_BHorv7V2NV7Jgg.jpeg'),
+                  NetworkImage(
+                      'https://cdn-images-1.medium.com/max/2000/1*wnIEgP1gNMrK5gZU7QS0-A.jpeg'),
+                  ExactAssetImage("assets/flutter.jpg"),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 450.0,
+            width: 350.0,
+            child: LightWidget(
+              animationDuration: const Duration(milliseconds: 1000),
+              autoplay: true,
+              animationCurve: Curves.easeInOut,
+              boxFit: BoxFit.cover,
+              pages: const [
+                _Pages(
+                    title: 'first page',
+                    networkImage:
+                        'https://avatars.githubusercontent.com/u/1609975?s=280&v=4'),
+                _Pages(title: 'second page', assetsImage: 'assets/flutter.jpg'),
+                _Pages(
+                    title: 'third page',
+                    networkImage:
+                        'https://images.ctfassets.net/23aumh6u8s0i/4TsG2mTRrLFhlQ9G1m19sC/4c9f98d56165a0bdd71cbe7b9c2e2484/flutter'),
+              ],
+            ),
+          ),
+        ],
+      ),
+      
+      
+  
+
 
 ```dart
 import 'package:light_carousel/light_carousel.dart';
