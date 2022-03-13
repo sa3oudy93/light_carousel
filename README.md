@@ -19,8 +19,8 @@ dependencies:
 
 And install it using `flutter packages get` on your project folder. After that, just import the module and use it:
 
-//...
 
+![Widget Carousel Animated](https://raw.githubusercontent.com/aisivan36/light_carousel/0.0.1/screenshot/flutter.png)
 
 ```dart
 import 'package:light_carousel/light_carousel.dart';
