@@ -1,6 +1,6 @@
 name: light_carousel
 description: A Light Carousel package that is forked from carousel pro has been migrated to null safety and some improvements.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/aisivan36/light_carousel
 
 environment:
