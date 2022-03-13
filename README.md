@@ -21,10 +21,10 @@ And install it using `flutter packages get` on your project folder. After that, 
 
 ![Widget Carousel Animated](https://raw.githubusercontent.com/aisivan36/light_carousel/0.0.1/screenshot/flutter.png)
 
-````dart
+dart
 import 'package:light_carousel/light_carousel.dart';
 
-//...
+
 Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -86,10 +86,10 @@ Column(
 ![Carousel 1](https://raw.githubusercontent.com/aisivan36/light_carousel/master/screenshots/screenshot01.png)
 
 
-```dart
+  dart
 import 'package:light_carousel/light_carousel.dart';
 
-//...
+
 SizedBox(
   height: 150.0,
   width: 300.0,
@@ -102,14 +102,15 @@ SizedBox(
   )
 ),
 
-````
+
 
 ![Carousel 2](https://raw.githubusercontent.com/aisivan36/light_carousel/master/screenshots/screenshot02.png)
 
-```dart
+
+dart
 import 'package:light_carousel/light_carousel.dart';
 
-//...
+
 SizedBox(
   height: 200.0,
   width: 350.0,
@@ -128,14 +129,15 @@ SizedBox(
   )
 ),
 
-```
+
 
 ![Carousel 3](https://raw.githubusercontent.com/aisivan36/light_carousel/master/screenshots/screenshot03.png)
 
-```dart
+
+dart
 import 'package:light_carousel/light_carousel.dart';
 
-//...
+
 SizedBox(
     height: 200.0,
     width: 350.0,
@@ -156,14 +158,14 @@ SizedBox(
     )
 ),
 
-```
+
 
 !![Carousel 4](https://raw.githubusercontent.com/aisivan36/light_carousel/master/screenshots/screenshot04.png)
 
-```dart
+dart
 import 'package:light_carousel/light_carousel.dart';
 
-//...
+
 SizedBox(
     height: 200.0,
     width: 350.0,
@@ -187,14 +189,14 @@ SizedBox(
     )
 ),
 
-```
+
 
 ![Carousel 5](https://raw.githubusercontent.com/aisivan36/light_carousel/master/screenshots/screenshot05.png)
 
-```dart
+dart
 import 'package:light_carousel/light_carousel.dart';
 
-//...
+
 SizedBox(
     height: 200.0,
     width: 350.0,
@@ -214,7 +216,6 @@ SizedBox(
     )
 ),
 
-```
 
 
 ## Parameters and Values
