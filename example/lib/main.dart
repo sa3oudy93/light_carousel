@@ -5,7 +5,7 @@ void main() {
   runApp(
     const MaterialApp(
       debugShowCheckedModeBanner: true,
-      title: 'Carousel Pro',
+      title: 'Light Carousel',
       home: CarouselPage(),
     ),
   );

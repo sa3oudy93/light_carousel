@@ -101,7 +101,7 @@ class LightWidget extends StatefulWidget {
 }
 
 class LightWidgetState extends State<LightWidget> {
-  PageController _controller = PageController();
+  PageController controller = PageController();
   Timer? timer;
 
   @override
@@ -110,14 +110,14 @@ class LightWidgetState extends State<LightWidget> {
 
     if (widget.autoplay) {
       timer = Timer.periodic(widget.autoplayDuration, (_) {
-        if (_controller.page == widget.pages!.length - 1) {
-          _controller.animateToPage(
+        if (controller.page == widget.pages!.length - 1) {
+          controller.animateToPage(
             0,
             duration: widget.animationDuration!,
             curve: widget.animationCurve!,
           );
         } else {
-          _controller.nextPage(
+          controller.nextPage(
             duration: widget.animationDuration!,
             curve: widget.animationCurve!,
           );
@@ -128,10 +128,8 @@ class LightWidgetState extends State<LightWidget> {
 
   @override
   void dispose() {
-    _controller.dispose();
-    _controller = PageController();
+    controller.dispose();
     timer?.cancel();
-    timer = null;
     super.dispose();
   }
 
@@ -147,7 +145,7 @@ class LightWidgetState extends State<LightWidget> {
       children: <Widget>[
         PageView(
           physics: const AlwaysScrollableScrollPhysics(),
-          controller: _controller,
+          controller: controller,
           children: listPages!,
         ),
         widget.showIndicator
@@ -172,14 +170,14 @@ class LightWidgetState extends State<LightWidget> {
                   padding: EdgeInsets.all(widget.indicatorBgPadding),
                   child: Center(
                     child: DotsIndicatorWidget(
-                      controller: _controller,
+                      controller: controller,
                       itemCount: listPages.length,
                       color: widget.dotColor!,
                       dotSize: widget.dotSize!,
                       dotSpacing: widget.dotSpacing!,
                       dotIncreaseSize: widget.dotIncreaseSize!,
                       onPageSelected: (int page) {
-                        _controller.animateToPage(
+                        controller.animateToPage(
                           page,
                           duration: widget.animationDuration!,
                           curve: widget.animationCurve!,

@@ -105,7 +105,7 @@ class LightCarousel extends StatefulWidget {
 class _LightCarouselState extends State<LightCarousel> {
   Timer? timer;
   int _currentImageIndex = 0;
-  PageController _pageController = PageController();
+  PageController pageController = PageController();
 
   @override
   void initState() {
@@ -114,14 +114,14 @@ class _LightCarouselState extends State<LightCarousel> {
     if (widget.images != null && widget.images!.isNotEmpty) {
       if (widget.autoPlay) {
         timer = Timer.periodic(widget.autoPlayDuration, (timer) {
-          if (_pageController.page?.round() == widget.images!.length - 1) {
-            _pageController.animateToPage(
+          if (pageController.page?.round() == widget.images!.length - 1) {
+            pageController.animateToPage(
               0,
               duration: widget.animationDuration,
               curve: widget.animationCurve,
             );
           } else {
-            _pageController.nextPage(
+            pageController.nextPage(
               duration: widget.animationDuration,
               curve: widget.animationCurve,
             );
@@ -133,10 +133,8 @@ class _LightCarouselState extends State<LightCarousel> {
 
   @override
   void dispose() {
-    _pageController.dispose();
-    _pageController = PageController();
+    pageController.dispose();
     timer?.cancel();
-    timer = null;
     super.dispose();
   }
 
@@ -221,7 +219,9 @@ class _LightCarouselState extends State<LightCarousel> {
                                   widget.radius ?? const Radius.circular(8.0))
                               : null,
                           image: DecorationImage(
-                            //colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.dstATop),
+                            // colorFilter: ColorFilter.mode(
+                            //     Colors.black.withOpacity(0.2),
+                            //     BlendMode.dstATop),
                             image: widget.defaultImage,
                             fit: widget.boxFit,
                           ),
@@ -246,7 +246,7 @@ class _LightCarouselState extends State<LightCarousel> {
                                   ),
                                 ),
                               )
-                            : Container(),
+                            : const SizedBox(),
                       )
                     : widget.defaultImage,
               ])
@@ -285,7 +285,7 @@ class _LightCarouselState extends State<LightCarousel> {
           builder: (_) {
             Widget pageView = PageView(
               physics: const AlwaysScrollableScrollPhysics(),
-              controller: _pageController,
+              controller: pageController,
               children: listImages!,
               onPageChanged: (currentPage) {
                 if (widget.onImageChange != null) {
@@ -329,7 +329,7 @@ class _LightCarouselState extends State<LightCarousel> {
                   padding: EdgeInsets.all(widget.indicatorBgPadding),
                   child: Center(
                     child: DotsIndicator(
-                      controller: _pageController,
+                      controller: pageController,
                       itemCount: listImages!.length,
                       color: widget.dotColor,
                       increasedColor: widget.dotIncreasedColor,
@@ -337,7 +337,7 @@ class _LightCarouselState extends State<LightCarousel> {
                       dotSpacing: widget.dotSpacing,
                       dotIncreaseSize: widget.dotIncreaseSize,
                       onPageSelected: (int page) {
-                        _pageController.animateToPage(
+                        pageController.animateToPage(
                           page,
                           duration: widget.animationDuration,
                           curve: widget.animationCurve,
