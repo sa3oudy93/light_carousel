@@ -92,6 +92,8 @@ class LightWidget extends StatefulWidget {
         assert(dotSpacing != null),
         assert(dotIncreaseSize != null),
         assert(dotColor != null),
+        assert(animationCurve != Curves.easeInBack,
+            'Do not use Curves.easeInBack it caused animate failed!'),
         super(key: key);
 
   @override
@@ -99,14 +101,15 @@ class LightWidget extends StatefulWidget {
 }
 
 class LightWidgetState extends State<LightWidget> {
-  final _controller = PageController();
+  PageController _controller = PageController();
+  Timer? timer;
 
   @override
   void initState() {
     super.initState();
 
     if (widget.autoplay) {
-      Timer.periodic(widget.autoplayDuration, (_) {
+      timer = Timer.periodic(widget.autoplayDuration, (_) {
         if (_controller.page == widget.pages!.length - 1) {
           _controller.animateToPage(
             0,
@@ -125,23 +128,27 @@ class LightWidgetState extends State<LightWidget> {
 
   @override
   void dispose() {
+    _controller.dispose();
+    _controller = PageController();
+    timer?.cancel();
+    timer = null;
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> listPages = widget.pages
-        ?.map((widget) => Container(
+    final List<SizedBox>? listPages = widget.pages
+        ?.map((widget) => SizedBox(
               child: widget,
             ))
-        .toList() as List<Widget>;
+        .toList();
 
     return Stack(
       children: <Widget>[
         PageView(
           physics: const AlwaysScrollableScrollPhysics(),
           controller: _controller,
-          children: listPages,
+          children: listPages!,
         ),
         widget.showIndicator
             ? Positioned(
