@@ -305,7 +305,7 @@ This project is made possible by the community surrounding it and especially the
 
 - [Ais Ivan](https://github.com/aisivan36)
 
-- [JLouage (Julien Louage)](http://www.jlouage.com) <info@jlouage.com>
+- [JLouage ](https://github.com/jlouage/flutter-carousel-pro)
 
 ## Contributing
 
