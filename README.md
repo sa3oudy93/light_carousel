@@ -13,16 +13,15 @@ Add the module to your project `pubspec.yaml`:
 ...
 dependencies:
  ...
- light_carousel: 
+ light_carousel:
 ...
 ```
 
 And install it using `flutter packages get` on your project folder. After that, just import the module and use it:
 
-
 ![Widget Carousel Animated](https://raw.githubusercontent.com/aisivan36/light_carousel/0.0.1/screenshot/flutter.png)
 
-```dart
+````dart
 import 'package:light_carousel/light_carousel.dart';
 
 //...
@@ -78,9 +77,13 @@ Column(
           ),
         ],
       ),
-      
-      
-  
+
+
+
+
+
+
+![Carousel 1](https://raw.githubusercontent.com/aisivan36/light_carousel/master/screenshots/screenshot01.png)
 
 
 ```dart
@@ -99,9 +102,9 @@ SizedBox(
   )
 ),
 
-```
+````
 
-![ScreenShot 01](https://github.com/jlouage/flutter-carousel-pro/blob/master/screenshots/screenshot01.png?raw=true "ScreenShot 01")
+![Carousel 2](https://raw.githubusercontent.com/aisivan36/light_carousel/master/screenshots/screenshot02.png)
 
 ```dart
 import 'package:light_carousel/light_carousel.dart';
@@ -127,7 +130,7 @@ SizedBox(
 
 ```
 
-![ScreenShot 02](https://github.com/jlouage/flutter-carousel-pro/blob/master/screenshots/screenshot02.png?raw=true "ScreenShot 02")
+![Carousel 3](https://raw.githubusercontent.com/aisivan36/light_carousel/master/screenshots/screenshot03.png)
 
 ```dart
 import 'package:light_carousel/light_carousel.dart';
@@ -155,7 +158,7 @@ SizedBox(
 
 ```
 
-![ScreenShot 03](https://github.com/jlouage/flutter-carousel-pro/blob/master/screenshots/screenshot03.png?raw=true "ScreenShot 03")
+!![Carousel 4](https://raw.githubusercontent.com/aisivan36/light_carousel/master/screenshots/screenshot04.png)
 
 ```dart
 import 'package:light_carousel/light_carousel.dart';
@@ -186,7 +189,7 @@ SizedBox(
 
 ```
 
-![ScreenShot 04](https://github.com/jlouage/flutter-carousel-pro/blob/master/screenshots/screenshot04.png?raw=true "ScreenShot 04")
+![Carousel 5](https://raw.githubusercontent.com/aisivan36/light_carousel/master/screenshots/screenshot05.png)
 
 ```dart
 import 'package:light_carousel/light_carousel.dart';
@@ -213,7 +216,6 @@ SizedBox(
 
 ```
 
-![ScreenShot 05](https://github.com/jlouage/flutter-carousel-pro/blob/master/screenshots/screenshot05.png?raw=true "ScreenShot 05")
 
 ## Parameters and Values
 
