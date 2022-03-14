@@ -285,7 +285,7 @@ class _LightCarouselState extends State<LightCarousel> {
                       )
                     : widget.defaultImage,
               ])
-        ?.cast<Widget>();
+        ?.cast<Widget>(); // Widget casting here
 
     final bottom = [
       DotPosition.bottomLeft,
