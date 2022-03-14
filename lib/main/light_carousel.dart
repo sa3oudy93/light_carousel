@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/// list of [DotPosition]
 enum DotPosition {
   topLeft,
   topCenter,
@@ -12,59 +13,91 @@ enum DotPosition {
   bottomRight,
 }
 
+/// main [library]
 class LightCarousel extends StatefulWidget {
+  /// All list of images on this Carousel
+  /// Provide The Image whether it's from [Netowrk] or local [Assets].
+  /// Implement [NetworkImage('imageUrl')], [AssetImage('assets/image.png')]
   final List? images;
 
+  /// All Images on this Carousel
   final dynamic defaultImage;
 
+  /// Transtition animation timing curver. The default is [Curves.ease]
+  /// `Watch out!` some Curves transition caused stuck failed to animate
+  /// Do not use [Curves.easeInBack] and some of unknown animation.
   final Curve animationCurve;
 
+  /// Transmition [Duration] 300ms is default value
   final Duration animationDuration;
 
+  /// Base [dotSize] 8.0 is default
   final double dotSize;
 
+  /// Increase size of the selected [DOT] default value is 2.0
   final double dotIncreaseSize;
 
+  /// The distance between each DOT default value is 25.0
   final double dotSpacing;
 
+  /// Color of each [DOT] [Colors.white] is default
   final Color dotColor;
 
+  /// he background Color of the dots. Default is [Colors.grey[800].withOpacity(0.5)]
   final Color? dotBgColor;
 
+  /// The Color of each increased dot. Default is [Colors.white]
   final Color dotIncreasedColor;
 
+  /// The Color of each increased dot. Default is [Colors.white]
   final bool showIndicator;
 
+  /// Padding Size of the background [Indicator]. Default is 20.0
   final double indicatorBgPadding;
 
+  /// How to show the [images] in the box. Default is [BoxFit.cover]
   final BoxFit boxFit;
 
+  /// Enable or Disable radius Border for the images. Default is [false]
   final bool borderRadius;
 
+  /// [Border] [Radius] of the [images]. Default is [Radius.circular(8.0)]
   final Radius? radius;
 
+  /// Indicator position. Default [DotPosition.bottomCenter]
   final DotPosition dotPosition;
 
+  /// Move the Indicator Horizontally relative to the dot [position]
   final double dotHorizontalPadding;
 
+  /// Move the Indicator Vertically relative to the dot [position]
   final double dotVerticalPadding;
 
+  /// Move the [Indicator] From the [Bottom]
   final double moveIndicatorFromBottom;
 
+  /// Remove the radius bottom from the indicator background. Default false
   final bool noRadiusForIndicator;
 
+  /// Enable/Disable Image Overlay Shadow. Default false
   final bool overlayShadow;
 
+  /// Choose the color of the overlay Shadow color. Default [Colors.grey[800]]
   final Color? overlayShadowColors;
 
+  /// Choose the size of the Overlay Shadow, from 0.0 to 1.0. Default 0.5
   final double overlayShadowSize;
 
+  /// Enable/Disable the auto play of the slider. Default true
   final bool autoPlay;
 
+  /// [Duration] of the Auto play slider by seconds. Default [Duration(seconds: 3)]
   final Duration autoPlayDuration;
 
+  /// [Duration] of the Auto play slider by seconds. Default 3 seconds
   final void Function(int)? onImageTap;
 
+  /// On image change event, passes previous image index and current image index as arguments
   final void Function(int, int)? onImageChange;
 
   const LightCarousel({
@@ -96,7 +129,9 @@ class LightCarousel extends StatefulWidget {
     this.onImageTap,
     this.onImageChange,
     this.defaultImage,
-  }) : super(key: key);
+  })  : assert(animationCurve != Curves.easeInBack,
+            'Do not use Curves.easeInBack it caused animate failed!'),
+        super(key: key);
 
   @override
   State<LightCarousel> createState() => _LightCarouselState();
@@ -367,28 +402,28 @@ class DotsIndicator extends AnimatedWidget {
     this.dotSpacing,
   }) : super(key: key, listenable: controller!);
 
-  // The PageController that this DotsIndicator is representing.
+  /// The [PageController] that this [DotsIndicator] is representing.
   final PageController? controller;
 
-  // The number of items managed by the PageController
+  /// The number of items managed by the [PageController]
   final int itemCount;
 
-  // Called when a dot is tapped
+  /// Called when a dot is [tapped]
   final ValueChanged<int>? onPageSelected;
 
-  // The color of the dots.
+  /// The color of the dots.
   final Color? color;
 
-  // The color of the increased dot.
+  /// The color of the increased dot.
   final Color? increasedColor;
 
-  // The base size of the dots
+  /// The base size of the dots
   final double dotSize;
 
-  // The increase in the size of the selected dot
+  /// The increase in the size of the selected dot
   final double? dotIncreaseSize;
 
-  // The distance between the center of each dot
+  /// The distance between the center of each dot
   final double? dotSpacing;
 
   Widget _buildDot(int index) {

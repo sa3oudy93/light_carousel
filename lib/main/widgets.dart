@@ -2,70 +2,73 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+/// Main Light Widget
 class LightWidget extends StatefulWidget {
-  //All the pages on this Carousel.
-  final List? pages;
+  /// All the pages on this Carousel. Must Provide Widget for Pages
+  final List<Widget> pages;
 
-  //The transition animation timing curve. Default is [Curves.ease]
-  final Curve? animationCurve;
+  /// Transtition animation timing curver. The default is [Curves.ease]
+  /// `Watch out!` some Curves transition caused stuck failed to animate
+  /// Do not use [Curves.easeInBack] and some of unknown animation.
+  final Curve animationCurve;
 
-  //The transition animation duration. Default is 300ms.
-  final Duration? animationDuration;
+  ///The transition animation duration. Default is 300ms.
+  final Duration animationDuration;
 
-  // The base size of the dots. Default is 8.0
-  final double? dotSize;
+  /// The base size of the dots. Default is 8.0
+  final double dotSize;
 
-  // The increase in the size of the selected dot. Default is 2.0
-  final double? dotIncreaseSize;
+  /// The increase in the size of the selected dot. Default is 2.0
+  final double dotIncreaseSize;
 
-  // The distance between the center of each dot. Default is 25.0
-  final double? dotSpacing;
+  /// The distance between the center of each dot. Default is 25.0
+  final double dotSpacing;
 
-  // The Color of each dot. Default is Colors.white
+  /// The Color of each dot. Default is Colors.white
   final Color? dotColor;
 
-  // The background Color of the dots. Default is [Colors.grey[800].withOpacity(0.5)]
+  /// The background Color of the dots. Default is [Colors.grey[800].withOpacity(0.5)]
   final Color? dotBgColor;
 
-  // Enable or Disable the indicator (dots). Default is true
+  /// Enable or Disable the indicator (dots). Default is true
   final bool showIndicator;
 
-  //Padding Size of the background Indicator. Default is 20.0
+  /// Padding Size of the background Indicator. Default is 20.0
   final double indicatorBgPadding;
 
-  //How to show the images in the box. Default is cover
+  /// How to show the images in the box. Default is cover
   final BoxFit boxFit;
 
-  //Enable/Disable radius Border for the images. Default is false
+  /// Enable/Disable radius Border for the images. Default is false
   final bool borderRadius;
 
-  //Border Radius of the images. Default is [Radius.circular(8.0)]
+  /// Border Radius of the images. Default is [Radius.circular(8.0)]
   final Radius? radius;
 
-  //Move the Indicator From the Bottom
+  /// Move the Indicator From the Bottom
   final double moveIndicatorFromBottom;
 
-  //Remove the radius bottom from the indicator background. Default false
+  /// Remove the radius bottom from the indicator background. Default false
   final bool noRadiusForIndicator;
 
-  //Enable/Disable Image Overlay Shadow. Default false
+  /// Enable/Disable Image Overlay Shadow. Default false
   final bool overlayShadow;
 
-  //Choose the color of the overlay Shadow color. Default Colors.grey[800]
+  /// Choose the color of the overlay Shadow color. Default Colors.grey[800]
   final Color? overlayShadowColors;
 
-  //Choose the size of the Overlay Shadow, from 0.0 to 1.0. Default 0.5
+  /// Choose the size of the Overlay Shadow, from 0.0 to 1.0. Default 0.5
   final double overlayShadowSize;
 
-  //Enable/Disable the auto play of the slider. Default true
-  final bool autoplay;
+  /// Enable/Disable the auto play of the slider. Default is [true]
+  final bool autoPlay;
 
-  //Duration of the Auto play slider by seconds. Default 3 seconds
-  final Duration autoplayDuration;
+  /// [Duration] of the Auto play slider by seconds. Default 3 seconds
+  final Duration autoPlayDuration;
 
   const LightWidget(
       {Key? key,
-      this.pages,
+      required this.pages,
       this.animationCurve = Curves.ease,
       this.animationDuration = const Duration(milliseconds: 300),
       this.dotSize = 8.0,
@@ -83,16 +86,9 @@ class LightWidget extends StatefulWidget {
       this.overlayShadow = false,
       this.overlayShadowColors,
       this.overlayShadowSize = 0.5,
-      this.autoplay = true,
-      this.autoplayDuration = const Duration(seconds: 3)})
-      : assert(pages != null),
-        assert(animationCurve != null),
-        assert(animationDuration != null),
-        assert(dotSize != null),
-        assert(dotSpacing != null),
-        assert(dotIncreaseSize != null),
-        assert(dotColor != null),
-        assert(animationCurve != Curves.easeInBack,
+      this.autoPlay = true,
+      this.autoPlayDuration = const Duration(seconds: 3)})
+      : assert(animationCurve != Curves.easeInBack,
             'Do not use Curves.easeInBack it caused animate failed!'),
         super(key: key);
 
@@ -108,18 +104,18 @@ class LightWidgetState extends State<LightWidget> {
   void initState() {
     super.initState();
 
-    if (widget.autoplay) {
-      timer = Timer.periodic(widget.autoplayDuration, (_) {
-        if (controller.page == widget.pages!.length - 1) {
+    if (widget.autoPlay) {
+      timer = Timer.periodic(widget.autoPlayDuration, (_) {
+        if (controller.page == widget.pages.length - 1) {
           controller.animateToPage(
             0,
-            duration: widget.animationDuration!,
-            curve: widget.animationCurve!,
+            duration: widget.animationDuration,
+            curve: widget.animationCurve,
           );
         } else {
           controller.nextPage(
-            duration: widget.animationDuration!,
-            curve: widget.animationCurve!,
+            duration: widget.animationDuration,
+            curve: widget.animationCurve,
           );
         }
       });
@@ -135,8 +131,8 @@ class LightWidgetState extends State<LightWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final List<SizedBox>? listPages = widget.pages
-        ?.map((widget) => SizedBox(
+    final List<Widget>? listPages = widget.pages
+        .map((widget) => SizedBox(
               child: widget,
             ))
         .toList();
@@ -173,21 +169,21 @@ class LightWidgetState extends State<LightWidget> {
                       controller: controller,
                       itemCount: listPages.length,
                       color: widget.dotColor!,
-                      dotSize: widget.dotSize!,
-                      dotSpacing: widget.dotSpacing!,
-                      dotIncreaseSize: widget.dotIncreaseSize!,
+                      dotSize: widget.dotSize,
+                      dotSpacing: widget.dotSpacing,
+                      dotIncreaseSize: widget.dotIncreaseSize,
                       onPageSelected: (int page) {
                         controller.animateToPage(
                           page,
-                          duration: widget.animationDuration!,
-                          curve: widget.animationCurve!,
+                          duration: widget.animationDuration,
+                          curve: widget.animationCurve,
                         );
                       },
                     ),
                   ),
                 ),
               )
-            : Container(),
+            : const SizedBox(),
       ],
     );
   }
@@ -206,25 +202,25 @@ class DotsIndicatorWidget extends AnimatedWidget {
     this.dotSpacing,
   }) : super(key: key, listenable: controller ?? PageController());
 
-  // The PageController that this DotsIndicator is representing.
+  /// The [PageController] that this [DotsIndicator] is representing.
   final PageController? controller;
 
-  // The number of items managed by the PageController
+  /// The number of items managed by the [PageController]
   final int? itemCount;
 
-  // Called when a dot is tapped
+  /// Called when a dot is [tapped]
   final ValueChanged<int>? onPageSelected;
 
-  // The color of the dots.
+  /// The [color] of the [dots].
   final Color? color;
 
-  // The base size of the dots
+  /// The base [size] of the dots
   final double? dotSize;
 
-  // The increase in the size of the selected dot
+  /// The increase in the [size] of the selected [dot]
   final double? dotIncreaseSize;
 
-  // The distance between the center of each dot
+  /// The distance between the center of each [dot]
   final double? dotSpacing;
 
   Widget _buildDot(int index) {

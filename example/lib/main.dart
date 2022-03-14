@@ -20,7 +20,7 @@ class CarouselPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Center(
+          Center(
             child: SizedBox(
               height: 150.0,
               width: 300.0,
@@ -28,15 +28,16 @@ class CarouselPage extends StatelessWidget {
                 boxFit: BoxFit.cover,
                 autoPlay: true,
                 animationCurve: Curves.fastOutSlowIn,
-                animationDuration: Duration(milliseconds: 1000),
+                animationDuration: const Duration(milliseconds: 1000),
                 dotSize: 6.0,
-                dotIncreasedColor: Color(0xFFFF335C),
+                dotIncreasedColor: const Color(0xFFFF335C),
                 dotBgColor: Colors.transparent,
                 dotPosition: DotPosition.bottomCenter,
                 dotVerticalPadding: 10.0,
                 showIndicator: true,
                 indicatorBgPadding: 7.0,
-                images: [
+                images: const [
+                  AssetImage('assets/flutter.jpg'),
                   NetworkImage(
                       'https://cdn-images-1.medium.com/max/2000/1*GqdzzfB_BHorv7V2NV7Jgg.jpeg'),
                   NetworkImage(
@@ -51,7 +52,7 @@ class CarouselPage extends StatelessWidget {
             width: 350.0,
             child: LightWidget(
               animationDuration: const Duration(milliseconds: 1000),
-              autoplay: true,
+              autoPlay: true,
               animationCurve: Curves.easeInOut,
               boxFit: BoxFit.cover,
               pages: const [
