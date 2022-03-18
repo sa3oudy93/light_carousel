@@ -25,7 +25,7 @@ class LightWidget extends StatefulWidget {
   final double dotSpacing;
 
   /// The Color of each dot. Default is Colors.white
-  final Color? dotColor;
+  final Color dotColor;
 
   /// The background Color of the dots. Default is [Colors.grey[800].withOpacity(0.5)]
   final Color? dotBgColor;
@@ -88,7 +88,14 @@ class LightWidget extends StatefulWidget {
       this.overlayShadowSize = 0.5,
       this.autoPlay = true,
       this.autoPlayDuration = const Duration(seconds: 3)})
-      : assert(animationCurve != Curves.easeInBack,
+      : assert(pages != null),
+        assert(animationCurve != null),
+        assert(animationDuration != null),
+        assert(dotSize != null),
+        assert(dotSpacing != null),
+        assert(dotIncreaseSize != null),
+        assert(dotColor != null),
+        assert(animationCurve != Curves.easeInBack,
             'Do not use Curves.easeInBack it caused animate failed!'),
         super(key: key);
 
@@ -159,8 +166,9 @@ class LightWidgetState extends State<LightWidget> {
                             : BorderRadius.only(
                                 bottomLeft:
                                     widget.radius ?? const Radius.circular(8.0),
-                                bottomRight: widget.radius ??
-                                    const Radius.circular(8.0)))
+                                bottomRight:
+                                    widget.radius ?? const Radius.circular(8.0),
+                              ))
                         : null,
                   ),
                   padding: EdgeInsets.all(widget.indicatorBgPadding),
@@ -168,7 +176,7 @@ class LightWidgetState extends State<LightWidget> {
                     child: DotsIndicatorWidget(
                       controller: controller,
                       itemCount: listPages.length,
-                      color: widget.dotColor!,
+                      color: widget.dotColor,
                       dotSize: widget.dotSize,
                       dotSpacing: widget.dotSpacing,
                       dotIncreaseSize: widget.dotIncreaseSize,
