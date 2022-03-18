@@ -88,14 +88,7 @@ class LightWidget extends StatefulWidget {
       this.overlayShadowSize = 0.5,
       this.autoPlay = true,
       this.autoPlayDuration = const Duration(seconds: 3)})
-      : assert(pages != null),
-        assert(animationCurve != null),
-        assert(animationDuration != null),
-        assert(dotSize != null),
-        assert(dotSpacing != null),
-        assert(dotIncreaseSize != null),
-        assert(dotColor != null),
-        assert(animationCurve != Curves.easeInBack,
+      : assert(animationCurve != Curves.easeInBack,
             'Do not use Curves.easeInBack it caused animate failed!'),
         super(key: key);
 
