@@ -100,6 +100,9 @@ class LightCarousel extends StatefulWidget {
   /// On image change event, passes previous image index and current image index as arguments
   final void Function(int, int)? onImageChange;
 
+  /// On image change event, passes previous image index and current image index as arguments
+  final PageController? controller;
+
   const LightCarousel({
     Key? key,
     this.images,
@@ -129,6 +132,7 @@ class LightCarousel extends StatefulWidget {
     this.onImageTap,
     this.onImageChange,
     this.defaultImage,
+    this.controller,
   })  : assert(animationCurve != Curves.easeInBack,
             'Do not use Curves.easeInBack it caused animate failed!'),
         super(key: key);
@@ -140,23 +144,26 @@ class LightCarousel extends StatefulWidget {
 class _LightCarouselState extends State<LightCarousel> {
   Timer? timer;
   int _currentImageIndex = 0;
-  PageController pageController = PageController();
+  PageController _pageController = PageController();
 
   @override
   void initState() {
     super.initState();
+    if (widget.controller != null) {
+      _pageController = widget.controller!;
+    }
 
     if (widget.images != null && widget.images!.isNotEmpty) {
       if (widget.autoPlay) {
         timer = Timer.periodic(widget.autoPlayDuration, (timer) {
-          if (pageController.page?.round() == widget.images!.length - 1) {
-            pageController.animateToPage(
+          if (_pageController.page?.round() == widget.images!.length - 1) {
+            _pageController.animateToPage(
               0,
               duration: widget.animationDuration,
               curve: widget.animationCurve,
             );
           } else {
-            pageController.nextPage(
+            _pageController.nextPage(
               duration: widget.animationDuration,
               curve: widget.animationCurve,
             );
@@ -168,7 +175,7 @@ class _LightCarouselState extends State<LightCarousel> {
 
   @override
   void dispose() {
-    pageController.dispose();
+    _pageController.dispose();
     timer?.cancel();
     super.dispose();
   }
@@ -320,7 +327,7 @@ class _LightCarouselState extends State<LightCarousel> {
           builder: (_) {
             Widget pageView = PageView(
               physics: const AlwaysScrollableScrollPhysics(),
-              controller: pageController,
+              controller: _pageController,
               children: listImages!,
               onPageChanged: (currentPage) {
                 if (widget.onImageChange != null) {
@@ -364,7 +371,7 @@ class _LightCarouselState extends State<LightCarousel> {
                   padding: EdgeInsets.all(widget.indicatorBgPadding),
                   child: Center(
                     child: DotsIndicator(
-                      controller: pageController,
+                      controller: _pageController,
                       itemCount: listImages!.length,
                       color: widget.dotColor,
                       increasedColor: widget.dotIncreasedColor,
@@ -372,7 +379,7 @@ class _LightCarouselState extends State<LightCarousel> {
                       dotSpacing: widget.dotSpacing,
                       dotIncreaseSize: widget.dotIncreaseSize,
                       onPageSelected: (int page) {
-                        pageController.animateToPage(
+                        _pageController.animateToPage(
                           page,
                           duration: widget.animationDuration,
                           curve: widget.animationCurve,
