@@ -11,8 +11,16 @@ void main() {
   );
 }
 
-class CarouselPage extends StatelessWidget {
+class CarouselPage extends StatefulWidget {
   const CarouselPage({Key? key}) : super(key: key);
+
+  @override
+  State<CarouselPage> createState() => _CarouselPageState();
+}
+
+class _CarouselPageState extends State<CarouselPage> {
+  final PageController pageController = PageController();
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +33,14 @@ class CarouselPage extends StatelessWidget {
               height: 150.0,
               width: 300.0,
               child: LightCarousel(
+                controller: pageController,
                 boxFit: BoxFit.cover,
-                autoPlay: true,
-                animationCurve: Curves.fastOutSlowIn,
-                animationDuration: const Duration(milliseconds: 1000),
+                autoPlay: false,
+                onImageChange: (_, index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
                 dotSize: 6.0,
                 dotIncreasedColor: const Color(0xFFFF335C),
                 dotBgColor: Colors.transparent,
@@ -46,6 +58,33 @@ class CarouselPage extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+          ButtonBar(
+            alignment: MainAxisAlignment.spaceAround,
+            children: [
+              MaterialButton(
+                onPressed: () {
+                  pageController.animateToPage(
+                    selectedIndex - 1,
+                    duration: const Duration(milliseconds: 250),
+                    curve: Curves.ease,
+                  );
+                },
+                child: const Text('Previous image'),
+                color: Colors.blue,
+              ),
+              MaterialButton(
+                onPressed: () {
+                  pageController.animateToPage(
+                    selectedIndex + 1,
+                    duration: const Duration(milliseconds: 250),
+                    curve: Curves.ease,
+                  );
+                },
+                child: const Text('Next image'),
+                color: Colors.blue,
+              ),
+            ],
           ),
           SizedBox(
             height: 450.0,
